@@ -11,7 +11,7 @@ require "function/functions.php";
     <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Smp Muhammadiyah Wanasari</title>
+    <title>TK NEGERI PEMBINA KECAMATAN KABAWETAN - Login</title>
 
     <style type="text/css">
         body {
@@ -63,8 +63,9 @@ require "function/functions.php";
 
                 <?php 
                     if(isset($_POST['login'])) {
-                        $username = $_POST['username'];
-                        $password = md5($_POST['password']); // Convert password to MD5 hash
+                        $username = mysqli_real_escape_string($conn,$_POST['username']); //untuk hindari sql injection
+                        $password = mysqli_real_escape_string($conn,$_POST['password']);
+                        $password = password_hash($password, PASSWORD_DEFAULT);//md5($_POST['password']); // Convert password to MD5 hash
 
                         $query = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
 
